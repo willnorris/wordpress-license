@@ -25,11 +25,12 @@ function cc_license() {
 function cc_license_head() {
   $license = cc_license();
   if ( $license ) {
-    echo '<link rel="license" href="' . $license . '" />' . "\n";
+    echo '<link rel="license" href="' . $license . '" type="text/html" />' . "\n";
+    echo '<link rel="license" href="' . trailingslashit($license) . 'rdf" type="application/rdf+xml" />' . "\n";
   }
 }
 add_action('wp_head', 'cc_license_head');
-
+add_action('atom_head', 'cc_license_head');
 
 /**
  * Add the Creative Commons XML namespace.
@@ -42,7 +43,6 @@ function cc_license_xmlns() {
 }
 add_action('rdf_ns', 'cc_license_xmlns');
 add_action('rss2_ns', 'cc_license_xmlns');
-add_action('atom_ns', 'cc_license_xmlns');
 
 
 /**
@@ -56,5 +56,3 @@ function cc_license_xmlfeed() {
 }
 add_action('rdf_header', 'cc_license_xmlfeed');
 add_action('rss2_head', 'cc_license_xmlfeed');
-add_action('atom_head', 'cc_license_xmlfeed');
-
