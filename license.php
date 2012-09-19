@@ -25,7 +25,7 @@ function cc_license() {
 function cc_license_head() {
   $license = cc_license();
   if ( $license ) {
-    echo '<link rel="license" href="' . $license . '" />' . "\n";
+    echo '<link rel="license" href="' . $license . '" type="text/html" />' . "\n";
     echo '<link rel="license" href="' . trailingslashit($license) . 'rdf" type="application/rdf+xml" />' . "\n";
   }
 }
