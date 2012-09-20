@@ -2,6 +2,7 @@
 /*
 Plugin Name: License
 Description: Minimal plugin for adding Creative Commons licensing information.
+Version: 1337
 Author: Will Norris
 Author URI: http://willnorris.com/
 */
