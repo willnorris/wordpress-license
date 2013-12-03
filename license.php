@@ -47,13 +47,27 @@ add_action('rss2_ns', 'cc_license_xmlns');
 
 
 /**
- * Add the Creative Commons XML element.
+ * Add the Creative Commons RSS 2.0 element.
+ *
+ * @link http://wiki.creativecommons.org/RSS_2.0
  */
-function cc_license_xmlfeed() {
+function cc_license_rssfeed() {
   $license = cc_license();
   if ( $license ) {
     echo '<creativeCommons:license>' . $license . '</creativeCommons:license>' . "\n";
   }
 }
-add_action('rdf_header', 'cc_license_xmlfeed');
-add_action('rss2_head', 'cc_license_xmlfeed');
+add_action('rss2_head', 'cc_license_rssfeed');
+
+/**
+ * Add the Creative Commons RDF (RSS 1.0) element.
+ *
+ * @link http://wiki.creativecommons.org/RSS_1.0
+ */
+function cc_license_rdffeed() {
+  $license = cc_license();
+  if ( $license ) {
+    echo '<creativeCommons:license rdf:resource="' . $license . '" />' . "\n";
+  }
+}
+add_action('rdf_header', 'cc_license_rdffeed');
