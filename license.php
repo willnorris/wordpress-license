@@ -34,6 +34,21 @@ add_action('wp_head', 'cc_license_head');
 add_action('atom_head', 'cc_license_head');
 
 /**
+ * Add license to WebFinger and host-meta.
+ */
+function cc_license_jrd($data) {
+  $license = cc_license();
+  if ( $license ) {
+    $data['links'][] = array("rel" => "license", "href" => $license, "type" => "text/html");
+    $data['links'][] = array("rel" => "license", "href" => trailingslashit($license) . "rdf", "type" => "application/rdf+xml");
+  }
+
+  return $data;
+}
+add_action('host_meta', 'cc_license_jrd', 10, 1);
+add_action('webfinger_post_data', 'cc_license_jrd', 10, 1);
+
+/**
  * Add the Creative Commons XML namespace.
  */
 function cc_license_xmlns() {
@@ -47,13 +62,27 @@ add_action('rss2_ns', 'cc_license_xmlns');
 
 
 /**
- * Add the Creative Commons XML element.
+ * Add the Creative Commons RSS 2.0 element.
+ *
+ * @link http://wiki.creativecommons.org/RSS_2.0
  */
-function cc_license_xmlfeed() {
+function cc_license_rssfeed() {
   $license = cc_license();
   if ( $license ) {
     echo '<creativeCommons:license>' . $license . '</creativeCommons:license>' . "\n";
   }
 }
-add_action('rdf_header', 'cc_license_xmlfeed');
-add_action('rss2_head', 'cc_license_xmlfeed');
+add_action('rss2_head', 'cc_license_rssfeed');
+
+/**
+ * Add the Creative Commons RDF (RSS 1.0) element.
+ *
+ * @link http://wiki.creativecommons.org/RSS_1.0
+ */
+function cc_license_rdffeed() {
+  $license = cc_license();
+  if ( $license ) {
+    echo '<creativeCommons:license rdf:resource="' . $license . '" />' . "\n";
+  }
+}
+add_action('rdf_header', 'cc_license_rdffeed');
