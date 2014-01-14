@@ -34,6 +34,21 @@ add_action('wp_head', 'cc_license_head');
 add_action('atom_head', 'cc_license_head');
 
 /**
+ * Add license to WebFinger and host-meta.
+ */
+function cc_license_jrd($data) {
+  $license = cc_license();
+  if ( $license ) {
+    $data['links'][] = array("rel" => "license", "href" => $license, "type" => "text/html");
+    $data['links'][] = array("rel" => "license", "href" => trailingslashit($license) . "rdf", "type" => "application/rdf+xml");
+  }
+
+  return $data;
+}
+add_action('host_meta', 'cc_license_jrd', 10, 1);
+add_action('webfinger_post_data', 'cc_license_jrd', 10, 1);
+
+/**
  * Add the Creative Commons XML namespace.
  */
 function cc_license_xmlns() {
