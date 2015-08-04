@@ -5,6 +5,8 @@ Description: Minimal plugin for adding Creative Commons licensing information.
 Version: 1337
 Author: Will Norris
 Author URI: http://willnorris.com/
+License: Apache 2.0
+License URI: https://www.apache.org/licenses/LICENSE-2.0
 */
 
 
