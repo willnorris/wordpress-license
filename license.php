@@ -7,6 +7,7 @@
  * Author URI: http://willnorris.com/
  * License: Apache 2.0
  * License URI: https://www.apache.org/licenses/LICENSE-2.0
+ * Update URI: https://github.com/willnorris/wordpress-license/
  */
 
 
